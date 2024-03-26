@@ -47,8 +47,9 @@ const manager = new ProductManager();
 
 console.log(manager.getProducts()); // []
 
-manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25);
+manager.addProduct('producto prueba', 'Este es un producto prueba1', 200, 'Sin imagen', 'abc123', 25);
+manager.addProduct('producto prueba 2', 'Este es un producto prueba', 600, 'img.jpg', 'def456', 20);
 manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25); //Mensaje producto ya existente
 
 console.log(manager.getProductById(1)); 
-console.log(manager.getProductById(3)); // Producto no encontrado.
+console.log(manager.getProductById(5)); // Producto no encontrado.
