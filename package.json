@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node --watch desafios/Desafio1.js"
+    "start": "node --watch desafios/ProductManagerDesafio2.js"
   },
   "keywords": [],
   "author": "",
