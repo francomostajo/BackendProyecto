@@ -111,7 +111,7 @@ class ProductManager {
     await manager.addProduct('producto prueba 2', 'Este es un producto prueba', 600, 'img.jpg', 'def456', 20);
     await manager.addProduct('producto prueba 3', 'Este es un producto prueba3', 500, 'img2.jpg', 'ghi789', 30);
     await manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'Sin imagen', 'abc123', 25); //Mensaje producto ya existente
-    console.log(manager.getProductById(1));
+    console.log(manager.getProductById(3));
     console.log(manager.getProductById(5)); // Producto no encontrado.
 
     await manager.updateProduct(1, { price: 250 });
