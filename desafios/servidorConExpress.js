@@ -8,11 +8,11 @@ const PORT = 8080;
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// Endpoint para obtener todos los productos
 const manager = new ProductManager('Productos.json');
 
+// Endpoints
 app.get('/products', async (req, res) => {
-    await manager.loadProducts(); // Cargar productos desde el archivo JSON
+    await manager.loadProducts(); 
     const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
     const products = limit ? manager.getProducts().slice(0, limit) : manager.getProducts();
     res.json(products);
@@ -98,59 +98,71 @@ app.listen(PORT, () => {
 
 
 
+//Clase
 
-
-
-
-
-//clase
 /* 
-const fs = require('fs').promises
+const express = require('express')
+const app = express()
+const PORT = 8080
 
+//Middlewares
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-class ManagerUsuarios {
-    constructor() {
-        this.usuariosFile = "Usuarios.json"
+let tasks = [
+    { id: 1, title: "Tarea 1" },
+    { id: 2, title: "Tarea 2" },
+    { id: 3, title: "Tarea 3" }
+]
+
+//Endpoints
+
+app.get('/tasks', (req, res) => {
+    res.json(tasks)
+})
+
+app.get('/tasks/:id', (req, res) => {
+    const taskId = parseInt(req.params.id)
+    const task = tasks.find((task) => task.id === taskId)
+    if (task) {
+        res.json(task)
+    } else {
+        res.status(404).json({ message: "Tarea no encontrada" })
     }
+})
 
-    async crearUsuario(usuario) {
-        try {
-            let usuarios = await this.leerUsuarios()
+app.post('/tasks', (req, res) => {
+    const { title } = req.body
 
-            usuarios.push(usuario)
-            await fs.writeFile(this.usuariosFile, JSON.stringify(usuarios, null, 2))
-            console.log("Usuario creado correctamente")
-        } catch (error) {
-            console.error("Error al crear el usuario", error)
-        }
+    const newTask = { id: tasks.length + 1, title: title }
+    tasks.push(newTask)
+    res.status(201).json(newTask)
+
+})
+
+app.put('/tasks/:id', (req, res) => {
+    const taskId = parseInt(req.params.id)
+    const task = tasks.find((task) => task.id === taskId)
+
+    if (task) {
+        const { title } = req.body
+        task.title = title
+        res.json(task)
+    } else {
+        res.status(404).json({ message: "Tarea no encontrado" })
     }
+})
 
-    async consultarUsuarios() {
-        try {
-            return await this.leerUsuarios()
-        } catch (error) {
-            console.error("Error al consultar usuarios", error)
-            return []
-        }
-    }
+app.delete('/tasks/:id', (req, res) => {
+    const taskId = parseInt(req.params.id)
+    tasks = tasks.filter((task) => task.id !== taskId)
+    res.json({ message: "Tarea eliminada correctamente" })
+})
 
-    async leerUsuarios() {
-        try {
-            const data = await fs.readFile(this.usuariosFile, 'utf8')
-            return JSON.parse(data)
-        } catch (error) {
-            if (error.code === 'ENOENT') {
-                return []
-            } else {
-                throw error
-            }
-        }
-    }
-}
-
-module.exports = ManagerUsuarios */
-
-
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+})
+ */
 
 
 
